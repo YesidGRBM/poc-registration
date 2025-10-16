@@ -9,7 +9,6 @@ import Button from '../../components/Button.svelte'
 
 const { id } = Astro.params
 
-if(id === undefined) return Astro.redirect("/")
 const response = await fetch(new URL(`/api/process/${id}/meta`, Astro.url))
 
 if(!response.ok) return Astro.redirect("/")
