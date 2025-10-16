@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import onboarding from '../assets/images/onboarding.webp'
+---
+<Layout>
+	<main class="flex flex-col max-h-[30rem] items-center gap-10 px-4">
+		<img src={onboarding.src} alt="on Boarding">
+
+		<section class="grid gap-2">
+			<h1 class="font-bold text-3xl text-[#13222A] text-center text-pretty">
+				¡Bienvenido a tu Identidad Digital!
+			</h1>
+			<p class="text-base font-normal text-[#3A4B53] text-center">
+				Para continuar tu proceso con [nombre de la entidad], es necesario crear tu identidad digital segura con SoyYO, solo necesitarás:
+				<strong class="font-bold">Tu selfie y tu cédula (debes tenerla a mano)</strong>
+			</p>
+		</section>
+	</main>
+</Layout>
