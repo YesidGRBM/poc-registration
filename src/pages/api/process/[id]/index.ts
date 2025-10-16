@@ -1,11 +1,13 @@
 import type { APIRoute } from "astro";
+import { URL_SERVER } from 'astro:env/server'
 
 import { generateKey, encryptData } from '../../../../utils/encrypt'
 
 export const GET: APIRoute = async ({ params }) => {
     const { id } = params
+
     try {
-        const response = await fetch(`http://localhost:8000/api/user/${id}`)
+        const response = await fetch(`${URL_SERVER}/api/user/${id}`)
         const res = await response.json()
         if(!response.ok) throw new Error(res.detail )
         const tempKey = generateKey();
