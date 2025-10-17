@@ -3,8 +3,9 @@ import { URL_SERVER } from 'astro:env/server'
 
 export const GET: APIRoute = async ({params}) => {
     const { id } = params
-    console.log({id, URL_SERVER})
-    const response = await fetch(`${URL_SERVER}/api/user/${id}/meta`, {
+    const url = `${URL_SERVER}/api/user/${id}/meta`
+    console.log({id, URL_SERVER, url})
+    const response = await fetch(url, {
         headers: {
             'Content-Type': 'application/json',
         },
