@@ -12,7 +12,7 @@ export default defineConfig({
   output: 'server',
   env: {
     schema: {
-      URL_SERVER: envField.string({context: 'server', access: 'public', default: 'https://poc-registration-services-production.up.railway.app/' })
+      URL_SERVER: envField.string({context: 'server', access: 'public', default: 'https://poc-registration-services-production.up.railway.app' })
     }
   },
   vite: {
