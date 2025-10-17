@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { URL_SERVER } from 'astro:env/server'
+import crypto from 'node:crypto'
 
-import { generateKey, encryptData } from '../../../../utils/encrypt'
 
 export const GET: APIRoute = async ({ params }) => {
     const { id } = params
@@ -14,11 +14,21 @@ export const GET: APIRoute = async ({ params }) => {
         })
         const res = await response.json()
         if(!response.ok) throw new Error(res.detail )
-        const tempKey = generateKey();
+        const tempKey = crypto.randomBytes(32);
         const keyBase64 = tempKey.toString('base64');
-        const data = encryptData(res, tempKey)
+        const iv = crypto.randomBytes(12)
+        const cipher = crypto.createCipheriv('aes-256-gcm', tempKey, iv);
+        const json = JSON.stringify(res);
+        const encrypted = Buffer.concat([
+            cipher.update(json, 'utf8'),
+            cipher.final()
+        ])
+        const auth = cipher.getAuthTag();
         const cookie = `key=${keyBase64}; Max-Age=60; Path=/; Secure; SameSite=Strict;`;
-        return new Response(JSON.stringify(data),{
+        return new Response(JSON.stringify({
+                data: Buffer.concat([encrypted, auth]).toString('base64'),
+                iv: iv.toString('base64')
+            }),{
             status: 200,
             headers: {
                 'Set-Cookie': cookie,
