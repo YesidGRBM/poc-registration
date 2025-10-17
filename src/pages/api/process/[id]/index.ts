@@ -5,9 +5,13 @@ import { generateKey, encryptData } from '../../../../utils/encrypt'
 
 export const GET: APIRoute = async ({ params }) => {
     const { id } = params
-
+    console.log({id, URL_SERVER})
     try {
-        const response = await fetch(`${URL_SERVER}/api/user/${id}`)
+        const response = await fetch(`${URL_SERVER}/api/user/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
         const res = await response.json()
         if(!response.ok) throw new Error(res.detail )
         const tempKey = generateKey();
