@@ -3,7 +3,6 @@ import onboarding from '../assets/images/onboarding.webp'
 import Layout from '../layouts/Layout.astro';
 import Boarding from './Boarding.astro';
 ---
-<Layout>
     <main class="flex flex-col max-h-[30rem] items-center gap-10 px-4">
         <img src={onboarding.src} alt="on Boarding">
         <Boarding id={Astro.params.id ?? ''} server:defer>
@@ -12,4 +11,7 @@ import Boarding from './Boarding.astro';
             </span>
         </Boarding>
     </main>
-</Layout>
+
+<footer class="flex justify-center items-center py-4">
+    SoyYO - Tu identidad digital segura
+</footer>
