@@ -1,53 +1,14 @@
 ---
 export const prerender = false;
-
 import Layout from '../../layouts/Layout.astro';
-import Link from '../../components/Link.astro'
-import onboarding from '../../assets/images/onboarding.webp'
 
-import Button from '../../components/Button.svelte'
+import MobilePage from '../../components/MobilePage.astro';
+import DesktopPage from '../../components/DesktopPage.astro';
 
-const { id } = Astro.params
+const userAgent = Astro.request.headers.get('user-agent') || "";
 
-const response = await fetch(new URL(`/api/process/${id}/meta`, Astro.url))
-
-if(!response.ok) return Astro.redirect("/")
-const res = await response.json()
-
+const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(userAgent);
 ---
 <Layout>
-	<main class="flex flex-col max-h-[30rem] items-center gap-10 px-4">
-		<img src={onboarding.src} alt="on Boarding">
-
-		{
-			res.active ? (
-				<section class="grid gap-2">
-					<h1 class="font-bold text-3xl text-[#13222A] text-center text-pretty">
-						¡Bienvenido a tu Identidad Digital!
-					</h1>
-					<p class="text-base font-normal text-[#3A4B53] text-center">
-						Para continuar tu proceso con <strong class="font-bold">{ res.process }</strong>, es necesario crear tu identidad digital segura con SoyYO, solo necesitarás:
-						<strong class="font-bold">Tu selfie y tu cédula (debes tenerla a mano)</strong>
-					</p>
-				</section>
-		
-				<Button id={id} client:only />
-				
-			) : (
-				<section class="grid gap-2">
-					<h1 class="font-bold text-3xl text-[#13222A] text-center text-pretty">
-						¡Bienvenido a tu Identidad Digital!
-					</h1>
-					<p class="text-base font-normal text-[#3A4B53] text-center">
-						Para continuar tu proceso con <strong class="font-bold">{ res.process }</strong>, es necesario crear tu identidad digital segura con SoyYO, solo necesitarás:
-						<strong class="font-bold">Tu selfie y tu cédula (debes tenerla a mano)</strong>
-					</p>
-				</section>
-
-				<Link href='http://www.google.com'>
-					Tu proceso caduco
-				</Link>
-			)
-		}
-	</main>
+	{isMobile ? <MobilePage id={Astro.params.id ?? ''} />: <DesktopPage id={Astro.params.id ?? ''} />}
 </Layout>

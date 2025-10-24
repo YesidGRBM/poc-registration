@@ -1,0 +1,30 @@
+---
+import Link from './Link.astro';
+import Button from './Button.svelte';
+
+interface Props {
+  id: string;
+}
+const { id } = Astro.props
+
+const response = await fetch(new URL(`/api/process/${id}/meta`, Astro.url))
+if(!response.ok) return Astro.redirect("/")
+const res = await response.json()
+---
+
+<section class="grid gap-2">
+	<h1 class="font-bold text-3xl text-[#13222A] text-center text-pretty">
+		¡Bienvenido a tu Identidad Digital!
+	</h1>
+	<p class="text-base font-normal text-[#3A4B53] text-center">
+		Para continuar tu proceso con <strong class="font-bold">{ res.process }</strong>, es necesario crear tu identidad digital segura con SoyYO, solo necesitarás:
+		<strong class="font-bold">Tu selfie y tu cédula (debes tenerla a mano)</strong>
+	</p>
+</section>
+{ res.active ? (
+    <Button id={id} client:only />
+):(
+    <Link href='http://www.google.com'>
+	    Tu proceso caduco
+	</Link>
+)
