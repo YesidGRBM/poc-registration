@@ -1,6 +1,6 @@
 import { renderers } from './renderers.mjs';
 import { s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_DQoWi7xJ.mjs';
-import { manifest } from './manifest_W5Y0J4fB.mjs';
+import { manifest } from './manifest_Dy3U791Z.mjs';
 
 const serverIslandMap = new Map([
 	['Boarding', () => import('./chunks/Boarding_C0-op4nw.mjs')],

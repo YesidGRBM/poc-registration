@@ -1,5 +1,5 @@
 import { e as createComponent, f as createAstro, m as maybeRenderHead, h as addAttribute, k as renderComponent, r as renderTemplate, u as unescapeHTML } from '../../chunks/astro/server_Db7UDbJN.mjs';
-import { $ as $$Layout } from '../../chunks/Layout_C35J6rXf.mjs';
+import { $ as $$Layout } from '../../chunks/Layout_-YmQeH2E.mjs';
 import { o as onboarding } from '../../chunks/onboarding_aC_db12B.mjs';
 import $$Boarding from '../../chunks/Boarding_C0-op4nw.mjs';
 /* empty css                                   */

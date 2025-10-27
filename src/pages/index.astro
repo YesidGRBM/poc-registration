@@ -1,9 +1,10 @@
 ---
+export const prerender = true
 import Layout from '../layouts/Layout.astro';
 import onboarding from '../assets/images/onboarding.webp'
 ---
 <Layout>
-	<main class="flex flex-col max-h-[30rem] items-center gap-10 px-4">
+	<main class="flex flex-col max-h-120 items-center gap-10 px-4">
 		<img src={onboarding.src} alt="on Boarding">
 
 		<section class="grid gap-2">
