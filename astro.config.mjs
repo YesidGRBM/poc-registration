@@ -4,7 +4,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import svelte from '@astrojs/svelte';
 
-import awsAmplify from 'astro-aws-amplify';
+import node from '@astrojs/node'
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,17 +16,15 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [svelte()],
-  adapter: awsAmplify(),
+  adapter: node({
+    mode: 'standalone'
+  }),
   image: {
     service: {
       entrypoint: 'astro/assets/services/noop'
     }
+  },
+  server: {
+    host: true
   }
 });
-
-
-// cloudflare({
-//   platformProxy: {
-//     enabled: true,
-//   },
-// })
